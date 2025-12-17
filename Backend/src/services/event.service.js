@@ -60,7 +60,7 @@ const update_Event = async (eventId, userId, updateData) => {
  * Delete event (owner only)
  */
 const delete_Event = async (eventId, userId) => {
-  const event = await Event.findOneAndDelete({
+  const event = await eventModel.findOneAndDelete({
     _id: eventId,
     createdBy: userId,
   });
