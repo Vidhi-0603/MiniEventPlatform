@@ -9,6 +9,7 @@ const cookieParser = require("cookie-parser");
 app.use(cookieParser()); 
 
 const authRoutes = require("./src/routes/auth.route");
+const eventRoutes = require("./src/routes/event.route");
 const connectDB = require("./src/config/mongo.config.js");
 
 const PORT = process.env.PORT || 5000;
@@ -17,6 +18,7 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
 app.use("/api/auth", authRoutes);
+app.use("/api/events", eventRoutes);
 
 connectDB().then(() => {
   console.log("✅ DB promise resolved");
