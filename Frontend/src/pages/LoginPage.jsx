@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { ShoppingCart, AlertCircle, X, CheckCircle } from "lucide-react";
 import axiosInstance from "../utils/axiosInstance";
-import { useAuth } from "../context/authContext";
+import { useAuth } from "../Context/authContext";
 
 const LoginPage = ({ onNavigate }) => {
   const { login } = useAuth();
