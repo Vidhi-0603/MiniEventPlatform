@@ -1,3 +1,4 @@
+import { useEffect } from "react";
 import { useState } from "react";
 
 const EventModal = ({ event, onClose, onSave }) => {
