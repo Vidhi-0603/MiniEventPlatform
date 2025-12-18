@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { AlertCircle, User, CheckCircle, X } from "lucide-react";
-import { useAuth } from "../Context/authContext";
+import { useAuth } from "../Context/AuthContext";
 import axiosInstance from "../utils/axiosInstance";
 
 const RegisterPage = ({ onNavigate }) => {

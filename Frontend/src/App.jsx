@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { useAuth } from "./Context/authContext";
+import { useAuth } from "./Context/AuthContext";
 import RegisterPage from "./pages/RegisterPage";
 import { HomePage } from "./pages/HomePage";
 import { MyEventsPage } from "./pages/MyEventsPage";

@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import axiosInstance from "../utils/axiosInstance";
-import { useAuth } from "../Context/authContext";
+import { useAuth } from "../Context/AuthContext";
 import { EventCard } from "../components/EventCard";
 import EventModal from "../components/EventModal";
 
