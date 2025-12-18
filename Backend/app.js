@@ -4,8 +4,15 @@ const app = express();
 const dotenv = require("dotenv");
 dotenv.config({ path: "./.env" });
 
-const cookieParser = require("cookie-parser");
+const cors = require("cors");
+app.use(
+  cors({
+    origin: process.env.CLIENT_URL,
+    credentials: true,
+  })
+);
 
+const cookieParser = require("cookie-parser");
 app.use(cookieParser()); 
 
 const authRoutes = require("./src/routes/auth.route");

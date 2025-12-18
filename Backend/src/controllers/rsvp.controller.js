@@ -1,4 +1,4 @@
-const { deleteRsvp, createRsvp } = require("../services/rsvp.service");
+const { deleteRsvp, createRsvp, getRsvps } = require("../services/rsvp.service");
 
 const create_Rsvp = async (req, res) => {
   try {
@@ -18,4 +18,13 @@ const delete_Rsvp = async (req, res) => {
   }
 };
 
-module.exports = { create_Rsvp, delete_Rsvp };
+const getMyRsvps = async (req, res) => {
+  try {
+    const rsvps = await getRsvps(req.user.id);
+    res.status(200).json({ rsvps });
+  } catch (err) {
+    res.status(400).json({ message: err.message });
+  }
+}
+
+module.exports = { create_Rsvp, delete_Rsvp, getMyRsvps };

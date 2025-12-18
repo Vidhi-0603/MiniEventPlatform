@@ -71,7 +71,22 @@ const deleteRsvp = async (eventId, userId) => {
   }
 };
 
+const getRsvps = async (userID) => {
+  try {
+      const rsvps = await rsvpModel
+        .find({ user: userID })
+        .select("event -_id"); // only event field
+
+      const eventIds = rsvps.map((r) => r.event.toString());
+
+    return eventIds;
+  } catch (err) {
+      throw err;
+  }
+}
+
 module.exports = {
   createRsvp,
   deleteRsvp,
+  getRsvps,
 };

@@ -15,8 +15,9 @@ const register_user = async (req, res, next) => {
       message: "User registered successfully",
       user,
     });
-  } catch (error) {
-    next(error);
+  } catch (err) {
+        const statusCode = err.statusCode || 500;
+    res.status(statusCode).json({ message: err.message });
   }
 };
 
@@ -30,9 +31,9 @@ const login_user = async (req, res, next) => {
       message: "User login successful",
       user,
     });
-  } catch (error) {
-    next(error);
-  }
+  } catch (err) {
+const statusCode = err.statusCode || 500;
+res.status(statusCode).json({ message: err.message });  }
 };
 const auth_user = async (req, res, next) => {
   try {
@@ -49,4 +50,14 @@ const auth_user = async (req, res, next) => {
   }
 };
 
-module.exports = { register_user, login_user, auth_user };
+const logoutUser = async (req, res, next) => {
+  
+    res.clearCookie("accessToken", {
+      ...cookieOptions,
+      maxAge: 0, // expire immediately
+    });
+
+    res.status(200).json({ message: "Logged out successfully" });
+}
+
+module.exports = { register_user, login_user, auth_user, logoutUser };

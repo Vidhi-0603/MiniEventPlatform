@@ -4,8 +4,21 @@ const { create_Event, get_All_Events, get_My_Events, update_Event,delete_Event} 
 // Create event
 const createEvent = async (req, res) => {
   try {
-    const event = await create_Event(req.body, req.user.id);
-    res.status(201).json(event);
+    const { title, description, dateTime, location, capacity } = req.body;
+
+    const imageUrl = req.file ? req.file.path : undefined;
+
+    const event = await create_Event({
+      title,
+      description,
+      dateTime,
+      location,
+      capacity,
+      imageUrl,
+      createdBy: req.user.id,
+    });
+
+    res.status(201).json( event );
   } catch (err) {
     res.status(400).json({ message: err.message });
   }
@@ -15,7 +28,7 @@ const createEvent = async (req, res) => {
 const getAllEvents = async (req, res) => {
   try {
     const events = await get_All_Events();
-    res.status(200).json(events);
+    res.status(200).json({events});
   } catch (err) {
     res.status(500).json({ message: err.message });
   }
@@ -25,7 +38,7 @@ const getAllEvents = async (req, res) => {
 const getMyEvents = async (req, res) => {
   try {
     const events = await get_My_Events(req.user.id);
-    res.json(events);
+    res.json({events});
   } catch (err) {
     res.status(500).json({ message: err.message });
   }

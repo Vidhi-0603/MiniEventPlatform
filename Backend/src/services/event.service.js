@@ -1,10 +1,19 @@
 const eventModel = require("../models/Event.model");
 
-const create_Event = async (eventData, userId) => {
-  return eventModel.create({
-    ...eventData,
-    createdBy: userId,
-  });
+const create_Event = async (
+  { title, description, dateTime, location, capacity , imageUrl ,createdBy}) => {
+    const event = await eventModel.create({
+      title,
+      description,
+      dateTime,
+      location,
+      capacity,
+      imageUrl,
+      createdBy,
+    });
+  
+  return event;
+  
 };
 
 /**
