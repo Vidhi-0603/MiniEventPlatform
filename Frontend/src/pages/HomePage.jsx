@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import axiosInstance from "../utils/axiosInstance";
-import { useAuth } from "../Context/authContext";
+import { useAuth } from "../context/authContext";
 import { EventCard } from "../components/EventCard";
 import EventModal from "../components/EventModal";
 
@@ -55,11 +55,11 @@ const HomePage = ({ onNavigate }) => {
 
   const handleCreateEvent = async (formData) => {
     try {
-    await axiosInstance.post("/events", formData, {
-      headers: {
-        "Content-Type": "multipart/form-data",
-      },
-    });
+      await axiosInstance.post("/events", formData, {
+        headers: {
+          "Content-Type": "multipart/form-data",
+        },
+      });
       setShowModal(false);
       fetchEvents();
     } catch (error) {

@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { useAuth } from "../Context/authContext";
+import { useAuth } from "../context/authContext";
 import axiosInstance from "../utils/axiosInstance";
 import { EventCard } from "../components/EventCard";
 import EventModal from "../components/EventModal";
