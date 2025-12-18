@@ -2,29 +2,39 @@ import { useState } from "react";
 
 const EventModal = ({ event, onClose, onSave }) => {
   const [formData, setFormData] = useState({
-    title: event?.title || "",
-    description: event?.description || "",
-    dateTime: event?.dateTime
-      ? new Date(event.dateTime).toISOString().slice(0, 16)
-      : "",
-    location: event?.location || "",
-    capacity: event?.capacity || "",
+    title: "",
+    description: "",
+    dateTime: "",
+    location: "",
+    capacity: "",
     image: null,
   });
 
+  useEffect(() => {
+    if (event) {
+      setFormData({
+        title: event.title || "",
+        description: event.description || "",
+        dateTime: event.dateTime
+          ? new Date(event.dateTime).toISOString().slice(0, 16)
+          : "",
+        location: event.location || "",
+        capacity: event.capacity || "",
+        image: null,
+      });
+    }
+  }, [event]);
+
   const handleSubmit = (e) => {
     e.preventDefault();
+
     const data = new FormData();
 
-    data.append("title", formData.title);
-    data.append("description", formData.description);
-    data.append("dateTime", formData.dateTime);
-    data.append("location", formData.location);
-    data.append("capacity", formData.capacity);
-
-    if (formData.image) {
-      data.append("image", formData.image); // 🔑 must be "image"
-    }
+    Object.entries(formData).forEach(([key, value]) => {
+      if (value !== null && value !== "") {
+        data.append(key, value);
+      }
+    });
 
     onSave(data);
   };
