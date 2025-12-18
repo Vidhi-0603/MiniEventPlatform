@@ -112,7 +112,7 @@ const MyEventsPage = ({ onNavigate }) => {
         )}
       </main>
 
-      {showModal && (
+      {showModal && editingEvent && (
         <EventModal
           event={editingEvent}
           onClose={() => {

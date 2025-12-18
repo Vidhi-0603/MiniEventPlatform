@@ -1,5 +1,10 @@
-const { create_Event, get_All_Events, get_My_Events, update_Event,delete_Event} = require("../services/event.service");
-
+const {
+  create_Event,
+  get_All_Events,
+  get_My_Events,
+  update_Event,
+  delete_Event,
+} = require("../services/event.service");
 
 // Create event
 const createEvent = async (req, res) => {
@@ -18,7 +23,7 @@ const createEvent = async (req, res) => {
       createdBy: req.user.id,
     });
 
-    res.status(201).json( event );
+    res.status(201).json(event);
   } catch (err) {
     res.status(400).json({ message: err.message });
   }
@@ -28,7 +33,7 @@ const createEvent = async (req, res) => {
 const getAllEvents = async (req, res) => {
   try {
     const events = await get_All_Events();
-    res.status(200).json({events});
+    res.status(200).json({ events });
   } catch (err) {
     res.status(500).json({ message: err.message });
   }
@@ -38,7 +43,7 @@ const getAllEvents = async (req, res) => {
 const getMyEvents = async (req, res) => {
   try {
     const events = await get_My_Events(req.user.id);
-    res.json({events});
+    res.json({ events });
   } catch (err) {
     res.status(500).json({ message: err.message });
   }
@@ -47,10 +52,16 @@ const getMyEvents = async (req, res) => {
 //  Update event
 const updateEvent = async (req, res) => {
   try {
+    const updateData = { ...req.body };
+
+    if (req.file) {
+      updateData.imageUrl = req.file.path;
+    }
+
     const updatedEvent = await update_Event(
       req.params.id,
       req.user.id,
-      req.body
+      updateData
     );
     res.json(updatedEvent);
   } catch (err) {

@@ -11,6 +11,8 @@ const HomePage = ({ onNavigate }) => {
   const [showModal, setShowModal] = useState(false);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const { user, logout } = useAuth();
+  const [selectedEvent, setSelectedEvent] = useState(null);
+
 
   useEffect(() => {
     fetchEvents();

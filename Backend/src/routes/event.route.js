@@ -15,7 +15,7 @@ const upload = require("../middlewares/uploadFile.middleware");
 router.post("/", isAuthenticated, upload.single("image"), createEvent);
 router.get("/", getAllEvents);
 router.get("/myEvents", isAuthenticated, getMyEvents);
-router.put("/:id", isAuthenticated, updateEvent);
+router.put("/:id", isAuthenticated, upload.single("image"), updateEvent);
 router.delete("/:id", isAuthenticated, deleteEvent);
 router.post("/:id/rsvp", isAuthenticated, create_Rsvp);
 router.delete("/:id/rsvp", isAuthenticated, delete_Rsvp);
